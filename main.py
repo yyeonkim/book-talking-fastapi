@@ -1,10 +1,10 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from fastapi import Request
+from quickdraw import QuickDrawData
 
-
+qd = QuickDrawData()
 app = FastAPI()
 
 origins = [
@@ -25,15 +25,24 @@ class Keywords(BaseModel):
     keywords: list
 
 
-@app.get("/")
-def read_message():
-    return {"message": "hello quickdraw"}
-
-
 @app.post("/api/keyword-image", tags=["keyword-image"])
-async def get_images(keywords: Keywords):
-    print(keywords)
-    return
+async def get_images(req: Keywords):
+    success = False
+
+    for keyword in req.keywords:
+        keywordList = keyword.strip().lower().split()
+        for item in keywordList:
+            try:
+                result = qd.get_drawing(item)
+                success = True
+                break
+            except:
+                continue
+
+    if not success:
+        raise HTTPException(status_code=404, detail="Image not found")
+
+    return result
 
 
 # run a Uvicorn server on port 8000 and reload on every file change
