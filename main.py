@@ -30,7 +30,7 @@ async def get_images(req: Keywords):
     success = False
 
     for keyword in req.keywords:
-        keywordList = keyword.strip().lower().split()
+        keywordList = keyword.lower().split()
         for item in keywordList:
             try:
                 result = qd.get_drawing(item)
