@@ -27,9 +27,10 @@ class Keywords(BaseModel):
 
 @app.post("/api/keyword-image", tags=["keyword-image"])
 async def get_images(req: Keywords):
-    success = False
+    success = False  # 이미지를 가져오는데 성공하면 True
 
     for keyword in req.keywords:
+        # 두 단어 이상으로 이루어진 문자는 나눠서 확인 (ex. white rabbit)
         keywordList = keyword.lower().split()
         for item in keywordList:
             try:
