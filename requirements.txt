@@ -1,0 +1,3 @@
+fastapi==0.95.2
+quickdraw==1.0.0
+uvicorn==0.22.0
