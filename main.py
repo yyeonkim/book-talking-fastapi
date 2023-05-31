@@ -51,4 +51,4 @@ async def get_images(req: Keywords):
 
 # run a Uvicorn server on port 8000 and reload on every file change
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="3.90.108.72", port=80, reload=True)
+    uvicorn.run("main:app", port=8080, reload=True)
