@@ -7,7 +7,13 @@ from quickdraw import QuickDrawData
 qd = QuickDrawData()
 app = FastAPI()
 
-origins = ["http://127.0.0.1:3000", "http://localhost:3000", "http://44.216.2.85:5000/"]
+origins = [
+    "http://localhost:3000",
+    "http://localhost",
+    "http://localhost:3000",
+    "http://44.216.2.85:5000",
+    "http://44.216.2.85",
+]
 
 app.add_middleware(
     CORSMiddleware,
